@@ -1,5 +1,5 @@
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import { MusicList } from '../features/music-playes/screens/MusicList';
+import { MusicList } from '@features/music-player/screens/MusicList';
 
 export type RootStackParams = {
 

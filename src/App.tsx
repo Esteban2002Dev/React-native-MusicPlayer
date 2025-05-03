@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
-import { StackNavigator } from './navigation/StackNavigator';
+import { StackNavigator } from '@navigation/StackNavigator';
 
 export default function App() {
 
