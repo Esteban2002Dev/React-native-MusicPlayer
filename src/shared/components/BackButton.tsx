@@ -1,6 +1,6 @@
+import { IonIcon } from '@shared/components/IonIcon';
 import { Pressable } from 'react-native';
 import React from 'react';
-import { IonIcon } from '@shared/components/IonIcon';
 
 export function BackButton() {
     return (
