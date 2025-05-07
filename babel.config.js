@@ -10,6 +10,7 @@ module.exports = {
           '@navigation': './src/navigation',
           '@config': './src/config',
           '@shared': './src/shared',
+          '@assets': './src/assets',
         },
       },
     ],

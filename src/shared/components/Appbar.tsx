@@ -7,12 +7,14 @@ interface AppbarProps {
     title?: string;
     showBackButton?: boolean;
     showBorderBottom?: boolean;
+    rightContent?: React.ReactNode;
 }
 
 export function Appbar({
     title = '',
     showBackButton = false,
     showBorderBottom = false,
+    rightContent
 }: AppbarProps) {
     return (
         <View style={{
@@ -28,6 +30,7 @@ export function Appbar({
             </View>
 
             <View style={styles.rightContainer}>
+                {rightContent ?? null}
             </View>
         </View>
     );
