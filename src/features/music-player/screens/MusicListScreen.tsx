@@ -11,7 +11,7 @@ import React from 'react';
  */
 import profileImg from '@assets/images/esteban.jpeg';
 
-export function MusicList() {
+export function MusicListScreen() {
     return (
         <View style={[globalStyles.container, globalStyles.background]}>
             <Appbar showBackButton />
