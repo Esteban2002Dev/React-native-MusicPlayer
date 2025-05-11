@@ -2,7 +2,7 @@ import { Header } from '@features/music-player/components/Header';
 import { globalStyles } from '@config/theme/GlobalStyles.styles';
 import { Appbar } from '@shared/components/Appbar';
 import { COLORS } from '@config/theme/Colors';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import React from 'react';
 
 /**
@@ -10,6 +10,7 @@ import React from 'react';
  * * and declare the file type as module.
  */
 import profileImg from '@assets/images/esteban.jpeg';
+import { MainButton } from '@shared/components/MainButton';
 
 export function MusicListScreen() {
     return (
@@ -32,7 +33,30 @@ export function MusicListScreen() {
                             }} />
                     </View>
                 } />
+                <View style={styles.buttonsContainer}>
+                    <View style={{flex: 2.5}}>
+                        <MainButton
+                        label='Play'
+                        color={COLORS.PURPLE.base}
+                        icon='play-circle-outline' />
+                    </View>
+                    <View style={{flex: 1.5}}>
+                        <MainButton
+                        color={COLORS.GREY.base}
+                        textColor={COLORS.DARK.base}
+                        icon='shuffle-outline' />
+                    </View>
+                </View>
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    buttonsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 10,
+        marginTop: 10
+    }
+});
