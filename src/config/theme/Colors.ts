@@ -11,7 +11,7 @@ export const COLORS = {
     DARK_BLUE: {
         base: '#181C27'
     },
-    GRAY: {
+    GREY: {
         base: '#E8E8E8'
     }
 } as const;

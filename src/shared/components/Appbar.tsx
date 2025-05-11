@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         height: 70,
         flexDirection: 'row',
         alignItems: 'center',
-        borderBottomColor: COLORS.GRAY.base,
+        borderBottomColor: COLORS.GREY.base,
     },
     leftContainer: {
         flex: 1,
