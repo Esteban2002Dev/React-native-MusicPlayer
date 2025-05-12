@@ -41,14 +41,14 @@ export function SearchInput({
 
     return (
         <View style={styles.inputContainer}>
-            <IonIcon name={icon} size={20} color={COLORS.GREY.base} style={styles.icon} />
+            <IonIcon name={icon} size={20} color={COLORS.GREY[500]} style={styles.icon} />
             <TextInput
                 style={styles.textInput}
                 inputAccessoryViewID={inputAccessoryViewID}
                 onChangeText={setInternalValue}
                 value={internalValue}
                 placeholder={placeholder}
-                placeholderTextColor={COLORS.GREY.base}
+                placeholderTextColor={COLORS.GREY[500]}
             />
         </View>
     );
