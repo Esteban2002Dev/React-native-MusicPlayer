@@ -22,7 +22,7 @@ export function CustomTabBar(props: BottomTabBarProps) {
                     borderRightWidth: 1.5,
                     borderLeftWidth: 1.5,
                     borderColor: COLORS.GREY.base,
-                    backgroundColor: COLORS.WHITE.base
+                    backgroundColor: COLORS.GREY[50]
                 }}>
                     {props.state.routes.map((route, index) => (
                         <TabButton

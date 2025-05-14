@@ -80,7 +80,7 @@ export function MusicItem({ item, index }: MusicItemProps) {
             {...panResponder.panHandlers}>
                 <Pressable style={({pressed}) => ({
                     ... styles.container,
-                    backgroundColor: pressed ? COLORS.GREY.base : COLORS.WHITE.base
+                    backgroundColor: pressed ? COLORS.GREY.base : COLORS.WHITE[200]
                 })}>
                     <View style={styles.index}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.indexText}>
