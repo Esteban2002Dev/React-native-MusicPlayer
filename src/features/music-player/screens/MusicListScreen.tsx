@@ -320,7 +320,7 @@ export function MusicListScreen() {
     return (
         <FlatList
         contentContainerStyle={{
-            paddingBottom: 80,
+            paddingBottom: 140,
         }}
         style={[globalStyles.container, globalStyles.background]}
         ListHeaderComponent={
