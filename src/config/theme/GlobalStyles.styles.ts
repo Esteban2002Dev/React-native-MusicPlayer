@@ -6,7 +6,7 @@ export const globalStyles = StyleSheet.create({
         flex: 1
     },
     background: {
-        backgroundColor: COLORS.WHITE.base
+        backgroundColor: COLORS.WHITE[200]
     },
     appContainer: {
         marginLeft: 12,
