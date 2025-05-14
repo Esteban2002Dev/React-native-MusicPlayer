@@ -1,3 +1,21 @@
+/**
+ * BlurView Component
+ * 
+ * Version: 
+ * 4.4.1
+ * 
+ * Package:
+ * @react-native-community/blur
+ * 
+ * Installation:
+ * npm install @react-native-community/blur
+ * 
+ * Usage:
+ * Import the BlurView and place it as an overlay on top of the element you want to blur.
+ * Documentation:
+ * https://www.npmjs.com/package/@react-native-community/blur
+ */
+
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { withOpacityHex } from '@features/utils/colorUtils';
 import image from '../../../../temp/images/song_image.jpeg';
