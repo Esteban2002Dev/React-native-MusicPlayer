@@ -9,7 +9,12 @@ export interface ISong {
     fileName: string;
     fileSize?: number;
     artwork?: string;
-    dateAdded?: Date;
+    dateAdded?: number | Date;
     isFavorite?: boolean;
     uri: string;
+    trackNumber?: number;
+}
+
+export interface ISongPlaying extends ISong {
+    playing?: boolean;
 }
