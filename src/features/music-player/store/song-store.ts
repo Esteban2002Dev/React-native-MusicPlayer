@@ -17,7 +17,7 @@
  */
 
 import { ISong, ISongPlaying } from '@shared/interfaces/song.interface';
-import { loadSongs } from '../services/music-player';
+import { loadSongs } from '@features/music-player/services/music-player';
 import { create } from 'zustand';
 
 interface SongState {
