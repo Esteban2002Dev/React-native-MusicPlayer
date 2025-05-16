@@ -17,7 +17,7 @@ import { MusicItem } from '../components/MusicItem';
 import { useSong } from '../store/song-store';
 
 export function MusicListScreen() {
-    const { songs, setSongs } = useSong();
+    const { songs, setSongs, playSong } = useSong();
     const [searchText, setSearchText] = useState('');
 
     const [filteredSongs, setFilteredSongs] = useState<ISong[]>([]);
@@ -78,6 +78,7 @@ export function MusicListScreen() {
                     <View style={styles.buttonsContainer}>
                         <View style={{flex: 2.5}}>
                             <MainButton
+                            onPress={() => playSong(songs[0])}
                             label='Play'
                             color={COLORS.PURPLE.base}
                             icon='play-circle-outline' />
@@ -88,9 +89,6 @@ export function MusicListScreen() {
                             textColor={COLORS.DARK.base}
                             icon='shuffle-outline' />
                         </View>
-                    </View>
-                    <View style={{ marginTop: 10 }}>
-
                     </View>
                 </View>
             </View>

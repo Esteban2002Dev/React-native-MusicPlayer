@@ -16,47 +16,78 @@
  * https://www.npmjs.com/package/@react-native-community/blur
  */
 
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, Animated } from 'react-native';
 import { withOpacityHex } from '@features/utils/colorUtils';
 import image from '../../../../temp/images/song_image.jpeg';
 import { BlurView } from '@react-native-community/blur';
 import { IonIcon } from '@shared/components/IonIcon';
+import React, { useEffect, useRef } from 'react';
 import { useSong } from '../store/song-store';
 import { COLORS } from '@config/theme/Colors';
-import React from 'react';
 
 export function MusicPlayerBanner() {
     const { playingSong, changePlayingSongState } = useSong();
-    if (!playingSong) return;
+
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    useEffect(() => {
+        if (playingSong) {
+            Animated.timing(fadeAnim, {
+                toValue: 1,
+                duration: 400,
+                useNativeDriver: true,
+            }).start();
+        }
+    }, [playingSong]);
+
+    if (!playingSong) return null;
 
     return (
-        <View style={styles.wrapper}>
+        <Animated.View style={[styles.wrapper]}>
             <BlurView
-            style={styles.absolute}
-            blurAmount={2}
-            blurType="light"
-            reducedTransparencyFallbackColor="white" />
-            <View style={styles.container}>
+                style={styles.absolute}
+                blurAmount={2}
+                blurType="light"
+                reducedTransparencyFallbackColor="white"
+            />
+            <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image}
-                    source={image} />
+                    <Image style={styles.image} source={image} />
                 </View>
                 <View style={styles.informationContainer}>
-                    <Text style={styles.title}>{playingSong.title}</Text>
-                    <Text style={styles.artist}>{playingSong.artist}</Text>
+                    <Text style={styles.title}>{playingSong.title.length > 30
+                    ? playingSong.title.slice(0, 30) + '...' : playingSong.title}</Text>
+                    <Text style={styles.artist}>{playingSong.artist.length > 30
+                    ? playingSong.artist.slice(0, 30) + '...' : playingSong.artist}</Text>
                 </View>
-                <View style={styles.iconContainer}>
+                <View style={styles.actionsContainer}>
+                    <IconButton icon="play-back-circle" />
                     <Pressable
                     onPress={() => changePlayingSongState(playingSong)}
-                    style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1, padding: 7 })}>
-                        <IonIcon color={COLORS.WHITE.base} name={playingSong.playing ? 'pause' : 'play'} />
+                    style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}>
+                        <IonIcon
+                            size={24}
+                            color={COLORS.WHITE.base}
+                            name={playingSong.playing ? 'pause-circle' : 'play-circle'}
+                        />
                     </Pressable>
+                    <IconButton icon="play-forward-circle" />
                 </View>
-            </View>
-        </View>
+            </Animated.View>
+        </Animated.View>
     );
 }
 
+interface IconButtonProps {
+    icon: string;
+}
+function IconButton({ icon }: IconButtonProps) {
+    return (
+        <Pressable style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}>
+            <IonIcon size={24} color={COLORS.WHITE.base} name={icon} />
+        </Pressable>
+    );
+}
 
 const styles = StyleSheet.create({
     absolute: {
@@ -77,8 +108,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        backgroundColor: withOpacityHex(COLORS.DARK_BLUE.base, .5),
-        opacity: 50,
+        backgroundColor: withOpacityHex(COLORS.DARK_BLUE.base, 0.5),
         padding: 5,
         minHeight: 60,
         alignItems: 'center',
@@ -104,10 +134,12 @@ const styles = StyleSheet.create({
     artist: {
         color: COLORS.WHITE.base,
         fontWeight: '300',
-        fontSize: 12
+        fontSize: 12,
     },
-    iconContainer: {
-        justifyContent: 'center',
+    actionsContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
+        gap: 5,
+        paddingHorizontal: 5
     },
 });
