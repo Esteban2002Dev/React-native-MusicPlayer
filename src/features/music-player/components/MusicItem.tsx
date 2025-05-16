@@ -12,17 +12,22 @@ import {
 import PlaylistIconOutline from '@assets/icons/playlist-outline.svg';
 import { ISong } from '@shared/interfaces/song.interface';
 import { IonIcon } from '@shared/components/IonIcon';
+import { useSong } from '../store/song-store';
 import { COLORS } from '@config/theme/Colors';
 import { useRef } from 'react';
 
 interface MusicItemProps {
     item: ISong;
     index: number;
+    disabled?: boolean;
 }
 
-export function MusicItem({ item, index }: MusicItemProps) {
+export function MusicItem({
+    item,
+    index,
+}: MusicItemProps) {
     const { width } = useWindowDimensions();
-
+    const { playSong } = useSong();
     const formatIndex = () => {
         return index.toString().length === 1 ? '0' + index.toString() : index;
     };
@@ -38,6 +43,9 @@ export function MusicItem({ item, index }: MusicItemProps) {
     const addToQueue = (side: string) => {
         console.log(side);
     };
+    const reproduceSong = (song: ISong) => {
+        playSong(song);
+    }
     
     const panResponder = useRef(
         PanResponder.create({
@@ -81,7 +89,8 @@ export function MusicItem({ item, index }: MusicItemProps) {
                 <Pressable style={({pressed}) => ({
                     ... styles.container,
                     backgroundColor: pressed ? COLORS.GREY.base : COLORS.WHITE[200]
-                })}>
+                })}
+                onPress={() => reproduceSong(item)}>
                     <View style={styles.index}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.indexText}>
                             {formatIndex()}

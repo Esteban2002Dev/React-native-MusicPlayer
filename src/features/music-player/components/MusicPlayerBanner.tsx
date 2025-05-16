@@ -21,13 +21,14 @@ import { withOpacityHex } from '@features/utils/colorUtils';
 import image from '../../../../temp/images/song_image.jpeg';
 import { BlurView } from '@react-native-community/blur';
 import { IonIcon } from '@shared/components/IonIcon';
+import { useSong } from '../store/song-store';
 import { COLORS } from '@config/theme/Colors';
 import React from 'react';
 
-interface MusicPlayerBannerProps {
-    
-}
 export function MusicPlayerBanner() {
+    const { playingSong, changePlayingSongState } = useSong();
+    if (!playingSong) return;
+
     return (
         <View style={styles.wrapper}>
             <BlurView
@@ -37,15 +38,18 @@ export function MusicPlayerBanner() {
             reducedTransparencyFallbackColor="white" />
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image style={styles.image} source={image} />
+                    <Image style={styles.image}
+                    source={image} />
                 </View>
                 <View style={styles.informationContainer}>
-                    <Text style={styles.title}>Me acostumbre a lo bueno</Text>
-                    <Text style={styles.artist}>Fuerza regida</Text>
+                    <Text style={styles.title}>{playingSong.title}</Text>
+                    <Text style={styles.artist}>{playingSong.artist}</Text>
                 </View>
                 <View style={styles.iconContainer}>
-                    <Pressable style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}>
-                        <IonIcon color={COLORS.WHITE.base} name='play' />
+                    <Pressable
+                    onPress={() => changePlayingSongState(playingSong)}
+                    style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1, padding: 7 })}>
+                        <IonIcon color={COLORS.WHITE.base} name={playingSong.playing ? 'pause' : 'play'} />
                     </Pressable>
                 </View>
             </View>
