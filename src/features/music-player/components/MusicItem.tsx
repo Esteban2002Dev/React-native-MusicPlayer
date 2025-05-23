@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
         minHeight: 80,
         flexDirection: 'row',
         gap: 5,
-        backgroundColor: 'white',
         overflow: 'hidden',
         borderBottomWidth: 1,
         borderColor: COLORS.GREY.base,
