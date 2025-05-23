@@ -41,8 +41,9 @@ const headerStyles = StyleSheet.create({
         paddingHorizontal: 5,
     },
     rightContainer: {
-        alignItems: 'flex-end',
         paddingHorizontal: 15,
+        display: 'flex',
+        justifyContent: 'center',
     },
     title: {
         fontSize: 35,
