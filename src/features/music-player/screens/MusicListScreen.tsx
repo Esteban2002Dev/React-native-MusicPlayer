@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View, FlatList } from 'react-native';
+import { Image, StyleSheet, View, FlatList, Pressable } from 'react-native';
 import { Header } from '@features/music-player/components/Header';
 import { globalStyles } from '@config/theme/GlobalStyles.styles';
 import React, { useEffect, useState } from 'react';
@@ -9,14 +9,19 @@ import { COLORS } from '@config/theme/Colors';
  * * To import images as modules we have to create the declarations file (declarations.d.ts)
  * * and declare the file type as module.
  */
+import { useAppNavigation } from '@navigation/hooks/useAppNavigation';
 import { MainButton } from '@shared/components/MainButton';
 import { ISong } from '@shared/interfaces/song.interface';
 import { SearchInput } from '../components/SearchInput';
 import profileImg from '@assets/images/esteban.jpeg';
 import { MusicItem } from '../components/MusicItem';
 import { useSong } from '../store/song-store';
+import { useTranslation } from 'react-i18next';
 
 export function MusicListScreen() {
+    const { navigation } = useAppNavigation();
+    const { t } = useTranslation();
+
     const { songs, setSongs, playSong } = useSong();
     const [searchText, setSearchText] = useState('');
 
@@ -48,15 +53,15 @@ export function MusicListScreen() {
         style={[globalStyles.container, globalStyles.background]}
         ListHeaderComponent={
             <View>
-                <Appbar showBackButton />
+                <Appbar />
                 <View style={globalStyles.appContainer}>
                     <Header
-                    title='Good Morning'
+                    title={t('music-list-screen.header.title', { ns: 'musicPlayer' })}
                     subtitle='Luis Esteban!'
-                    description='Listen to your music.'
+                    description={t('music-list-screen.header.subtitle', { ns: 'musicPlayer' })}
                     rightContent={
                         // TODO: Make this a shared component (ex. <Avatar />)
-                        <View>
+                        <Pressable onPress={() => navigation.navigate('Settings')}>
                             <Image source={profileImg} style={{
                                 width: 100,
                                 height: 100,
@@ -64,13 +69,13 @@ export function MusicListScreen() {
                                 borderWidth: 2,
                                 borderColor: COLORS.PURPLE.base
                             }} />
-                        </View>
+                        </Pressable>
                     } />
                     <View style={{
                         marginTop: 15
                     }}>
                         <SearchInput
-                        placeholder='Search your music...'
+                        placeholder={t('search-input.placeholder', { ns: 'musicPlayer' })}
                         icon='search'
                         text={searchText}
                         setText={setSearchText} />
@@ -79,7 +84,7 @@ export function MusicListScreen() {
                         <View style={{flex: 2.5}}>
                             <MainButton
                             onPress={() => playSong(songs[0])}
-                            label='Play'
+                            label={t('button-text.play', { ns: 'musicPlayer' })}
                             color={COLORS.PURPLE.base}
                             icon='play-circle-outline' />
                         </View>

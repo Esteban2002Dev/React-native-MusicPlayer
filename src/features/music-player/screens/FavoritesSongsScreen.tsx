@@ -5,12 +5,15 @@ import { MusicItem } from '../components/MusicItem';
 import { IonIcon } from '@shared/components/IonIcon';
 import { Appbar } from '@shared/components/Appbar';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, FlatList } from 'react-native';
 import { useSong } from '../store/song-store';
 import { Header } from '../components/Header';
 import { COLORS } from '@config/theme/Colors';
 
 export function FavoritesSongsScreen() {
+    const { t } = useTranslation();
+
     const { songs } = useSong();
     const [searchText, setSearchText] = useState('');
 
@@ -41,9 +44,9 @@ export function FavoritesSongsScreen() {
                 <Appbar showBackButton />
                 <View style={globalStyles.appContainer}>
                     <Header
-                    title={`Here's your`}
-                    subtitle={`Favorite songs.`}
-                    description={songs ? `${songs.length} songs were added.` : ''}
+                    title={t(`favorites-screen.header.title`, { ns: 'musicPlayer' })}
+                    subtitle={t(`favorites-screen.header.subtitle`, { ns: 'musicPlayer' })}
+                    description={songs ? `${songs.length} ${t(`favorites-screen.header.description`, { ns: 'musicPlayer' })}` : ''}
                     rightContent={
                         <IonIcon
                             name="heart"
