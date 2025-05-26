@@ -1,0 +1,22 @@
+{
+    "music-list-screen": {
+        "header" : {
+            "title": "Good Morning",
+            "subtitle": "Listen to your music.",
+            "description": ""
+        }
+    },
+    "favorites-screen": {
+        "header" : {
+            "title": "Here's your",
+            "subtitle": "Favorite songs.",
+            "description": "songs were added."
+        }
+    },
+    "button-text": {
+        "play": "Play"
+    },
+    "search-input": {
+        "placeholder": "search your music..."
+    }
+}

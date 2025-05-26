@@ -1,0 +1,22 @@
+{
+    "music-list-screen": {
+        "header" : {
+            "title": "Buenos dias",
+            "subtitle": "Escucha tu musica.",
+            "description": ""
+        }
+    },
+    "favorites-screen": {
+        "header" : {
+            "title": "Aqui estan tus",
+            "subtitle": "Canciones favoritas.",
+            "description": "canciones agregadas."
+        }
+    },
+    "button-text": {
+        "play": "Reproducir"
+    },
+    "search-input": {
+        "placeholder": "Buscar en tu musica..."
+    }
+}
