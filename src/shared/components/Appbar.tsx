@@ -2,6 +2,8 @@ import { BackButton } from '@shared/components/BackButton';
 import { View, StyleSheet, Text } from 'react-native';
 import { COLORS } from '@config/theme/Colors';
 import React from 'react';
+import { useAppNavigation } from '@navigation/hooks/useAppNavigation';
+import { globalStyles } from '@config/theme/GlobalStyles.styles';
 
 interface AppbarProps {
     title?: string;
@@ -16,13 +18,15 @@ export function Appbar({
     showBorderBottom = false,
     rightContent
 }: AppbarProps) {
+    const { navigation } = useAppNavigation();
     return (
         <View style={{
             ... styles.appbarContainer,
+            ... globalStyles.background,
             borderBottomWidth: showBorderBottom ? 1 : 0
             }}>
             <View style={styles.leftContainer}>
-                {showBackButton ? <BackButton /> : null}
+                {showBackButton && navigation.canGoBack() ? <BackButton /> : null}
             </View>
 
             <View style={styles.centerContainer}>

@@ -4,9 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PlaylistIconOutline from '@assets/icons/playlist-outline.svg';
 import { CustomTabBar } from './components/AnimatedBottomTabBar';
 import { IonIcon } from '@shared/components/IonIcon';
+import { useTranslation } from 'react-i18next';
 
 const Tab = createBottomTabNavigator();
 export function BottomTabNavigator() {
+  const { t } = useTranslation();
+
   return (
     <Tab.Navigator
     tabBar={(props) => <CustomTabBar {... props}></CustomTabBar>}
@@ -14,19 +17,20 @@ export function BottomTabNavigator() {
       headerShown: false,
       animation: 'fade'
     }}>
-      <Tab.Screen name='Music' component={MusicListScreen}
+      <Tab.Screen name={t('tabs-name.music', { ns: 'tabs' })} component={MusicListScreen}
       options={{
+        title: 'Mi musica',
         tabBarIcon: ({ color, size }) => (
           <IonIcon name="musical-notes-outline" color={color} size={size} />
         )
       }} />
-      <Tab.Screen name='Favorites' component={FavoritesSongsScreen}
+      <Tab.Screen name={t('tabs-name.favorites', { ns: 'tabs' })} component={FavoritesSongsScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
           <IonIcon name="heart-outline" color={color} size={size} />
         )
       }} />
-      <Tab.Screen name='Playlists' component={MusicListScreen} 
+      <Tab.Screen name={t('tabs-name.playlists', { ns: 'tabs' })} component={MusicListScreen} 
       options={{
         tabBarIcon: ({ color, size }) => (
           <PlaylistIconOutline width={size} height={size} color={color} />
