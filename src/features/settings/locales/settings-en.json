@@ -1,0 +1,25 @@
+{
+    "app-settings-screen": {
+        "header": {
+            "title": "Settings"
+        },
+        "sections": {
+            "account": "Account",
+            "global-configurations": "Global configurations"
+        },
+        "items": {
+            "my-account": {
+                "title": "My account",
+                "action": "Create an account"
+            },
+            "language": {
+                "title": "Language"
+            },
+            "theme": {
+                "title": "Theme",
+                "light": "Light mode",
+                "dark": "Dark mode"
+            }
+        }
+    }
+}

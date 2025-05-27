@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     rightContainer: {
-        flex: 1,
+        maxWidth: '50%',
+        paddingEnd: 10,
+        justifyContent: 'center',
         alignItems: 'flex-end',
-        paddingHorizontal: 15,
     },
     title: {
         fontSize: 18,

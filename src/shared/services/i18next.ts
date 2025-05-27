@@ -100,16 +100,21 @@ import tabsEs from '@navigation/locales/tabs-es.json';
 import musicPlayerEs from '@features/music-player/locales/music-player-es.json';
 import musicPlayerEn from '@features/music-player/locales/music-player-en.json';
 
+import settingsEn from '@features/settings/locales/settings-en.json';
+import settingsEs from '@features/settings/locales/settings-es.json';
+
 const locales = RNLocalize.getLocales();
 const deviceLanguage = locales[0]?.languageCode || 'en';
 const languageResources: Resource = {
     en: {
         tabs: tabsEn,
-        musicPlayer: musicPlayerEn
+        musicPlayer: musicPlayerEn,
+        settings: settingsEn
     }, 
     es: {
         tabs: tabsEs,
-        musicPlayer: musicPlayerEs
+        musicPlayer: musicPlayerEs,
+        settings: settingsEs
     }, 
 }
 
