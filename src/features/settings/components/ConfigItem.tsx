@@ -26,9 +26,12 @@ export function ConfigItem({
     onPress,
 }: ConfigItemProps) {
     return (
-        <Pressable onPress={onPress} style={styles.container}>
+        <View style={styles.container}>
             {sectionTitle && <Text style={styles.title}>{sectionTitle}</Text>}
-            <View style={styles.item}>
+            <Pressable onPress={onPress} style={({pressed}) => ({
+                ... styles.item,
+                opacity: pressed ? .7 : 1
+            })}>
                 <View style={styles.startContainer}>
                     {startIconName ? (
                         <IonIcon name={startIconName} color={COLORS.DARK.base} size={25} />
@@ -53,8 +56,8 @@ export function ConfigItem({
                         />
                     </View>
                 )}
-            </View>
-        </Pressable>
+            </Pressable>
+        </View>
     );
 }
 

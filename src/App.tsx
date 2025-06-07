@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import './shared/services/i18next';
 import { MusicPlayerBanner } from '@features/music-player/components/MusicPlayerBanner';
 import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
 import { StackNavigator } from '@navigation/StackNavigator';
