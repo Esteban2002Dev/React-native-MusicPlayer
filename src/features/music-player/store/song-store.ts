@@ -25,7 +25,7 @@ interface SongState {
     playingSong: ISongPlaying | null;
     
     setSongs: () => void;
-    playSong: (song: ISong) => void;
+    playSong: (song: ISong | null) => void;
     changePlayingSongState: (song: ISongPlaying) => void;
 }
 
@@ -36,8 +36,8 @@ export const useSong = create<SongState>()((set, get) => ({
         const loaded = loadSongs();
         set({ songs: loaded });
     },
-
-    playSong: (song: ISong) => {
+    playSong: (song: ISong | null) => {
+        if (!song) return set({playingSong: null}); 
         set({playingSong: {... song, playing: true}});
     },
     changePlayingSongState: (song: ISongPlaying) => {

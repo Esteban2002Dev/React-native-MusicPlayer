@@ -22,7 +22,7 @@ export function MusicListScreen() {
     const { navigation } = useAppNavigation();
     const { t } = useTranslation();
 
-    const { songs, setSongs, playSong } = useSong();
+    const { songs, setSongs, playSong, playingSong } = useSong();
     const [searchText, setSearchText] = useState('');
 
     const [filteredSongs, setFilteredSongs] = useState<ISong[]>([]);
@@ -48,7 +48,7 @@ export function MusicListScreen() {
     return (
         <FlatList
         contentContainerStyle={{
-            paddingBottom: 140,
+            paddingBottom: playingSong ? 140 : 80,
         }}
         style={[globalStyles.container, globalStyles.background]}
         ListHeaderComponent={

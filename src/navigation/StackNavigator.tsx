@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 export function StackNavigator() {
     return (
         <Stack.Navigator screenOptions={{
-            animation: 'default',
+            animation: 'fade',
             headerShown: false
         }}>
             <Stack.Screen name="MusicPlayerTabs" options={{ title: '' }} component={BottomTabNavigator} />

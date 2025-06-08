@@ -14,7 +14,7 @@ import { COLORS } from '@config/theme/Colors';
 export function FavoritesSongsScreen() {
     const { t } = useTranslation();
 
-    const { songs } = useSong();
+    const { songs, playingSong } = useSong();
     const [searchText, setSearchText] = useState('');
 
     const [filteredSongs, setFilteredSongs] = useState<ISong[]>([]);
@@ -36,7 +36,7 @@ export function FavoritesSongsScreen() {
     return (
         <FlatList
         contentContainerStyle={{
-            paddingBottom: 140,
+            paddingBottom: playingSong ? 140 : 80,
         }}
         style={[globalStyles.container, globalStyles.background]}
         ListHeaderComponent={
