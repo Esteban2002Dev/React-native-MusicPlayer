@@ -16,7 +16,7 @@
  * https://www.npmjs.com/package/@react-native-community/blur
  */
 
-import { View, Text, StyleSheet, Pressable, Image, Animated } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, Animated, PanResponder, GestureResponderEvent, PanResponderGestureState, useWindowDimensions } from 'react-native';
 import { withOpacityHex } from '@features/utils/colorUtils';
 import image from '../../../../temp/images/song_image.jpeg';
 import { BlurView } from '@react-native-community/blur';
@@ -26,9 +26,47 @@ import { useSong } from '../store/song-store';
 import { COLORS } from '@config/theme/Colors';
 
 export function MusicPlayerBanner() {
-    const { playingSong, changePlayingSongState } = useSong();
+    const { height } = useWindowDimensions();
+    const { playingSong, changePlayingSongState, playSong } = useSong();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const translateY = useRef(new Animated.Value(0)).current;
+    const opacity = translateY.interpolate({
+        inputRange: [2, height * 0.3],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+    });
+    const panResponder = useRef(
+        PanResponder.create({
+            onMoveShouldSetPanResponder: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
+                const { pageY } = evt.nativeEvent;
+                return pageY > 600 && gestureState.dy > 0;
+            },
+            onPanResponderMove: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
+                const dy = Math.min(height * 0.8, Math.max(0, gestureState.dy));
+                translateY.setValue(dy);
+            },
+            onPanResponderRelease: (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
+                if (gestureState.dy > height * 0.08) {
+                    Animated.timing(translateY, {
+                        toValue: height,
+                        duration: 200,
+                        useNativeDriver: true,
+                    }).start(() => {
+                        playSong(null);
+                    });
+                } else {
+                    Animated.spring(translateY, {
+                        toValue: 0,
+                        bounciness: 12,
+                        speed: 4,
+                        useNativeDriver: true,
+                    }).start();
+                }
+            }            
+        })
+    ).current;
 
     useEffect(() => {
         if (playingSong) {
@@ -37,13 +75,24 @@ export function MusicPlayerBanner() {
                 duration: 400,
                 useNativeDriver: true,
             }).start();
+            Animated.spring(translateY, {
+                toValue: 0,
+                bounciness: 3,
+                speed: 4,
+                useNativeDriver: true,
+            }).start();
         }
     }, [playingSong]);
 
     if (!playingSong) return null;
 
     return (
-        <Animated.View style={[styles.wrapper]}>
+        <Animated.View
+        style={[styles.wrapper, { opacity },
+            {
+                transform: [{translateY}]
+            }
+        ]} {... panResponder.panHandlers}>
             <BlurView
                 style={styles.absolute}
                 blurAmount={2}
@@ -55,10 +104,10 @@ export function MusicPlayerBanner() {
                     <Image style={styles.image} source={image} />
                 </View>
                 <View style={styles.informationContainer}>
-                    <Text style={styles.title}>{playingSong.title.length > 30
-                    ? playingSong.title.slice(0, 30) + '...' : playingSong.title}</Text>
-                    <Text style={styles.artist}>{playingSong.artist.length > 30
-                    ? playingSong.artist.slice(0, 30) + '...' : playingSong.artist}</Text>
+                    <Text style={styles.title}>{playingSong.title.length > 25
+                    ? playingSong.title.slice(0, 25) + '...' : playingSong.title}</Text>
+                    <Text style={styles.artist}>{playingSong.artist.length > 25
+                    ? playingSong.artist.slice(0, 25) + '...' : playingSong.artist}</Text>
                 </View>
                 <View style={styles.actionsContainer}>
                     <IconButton icon="play-back-circle" />
