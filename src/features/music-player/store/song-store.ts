@@ -16,7 +16,7 @@
  * https://zustand.docs.pmnd.rs/getting-started/introduction
  */
 
-import { ISong, ISongPlaying } from '@shared/interfaces/song.interface';
+import { ISong, ISongPlaying } from '@shared/interfaces/music-player/song.interface';
 import { loadSongs } from '@features/music-player/services/music-player';
 import { create } from 'zustand';
 

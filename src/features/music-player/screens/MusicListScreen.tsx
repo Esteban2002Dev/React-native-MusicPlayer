@@ -9,9 +9,9 @@ import { COLORS } from '@config/theme/Colors';
  * * To import images as modules we have to create the declarations file (declarations.d.ts)
  * * and declare the file type as module.
  */
+import { ISong } from '@shared/interfaces/music-player/song.interface';
 import { useAppNavigation } from '@navigation/hooks/useAppNavigation';
 import { MainButton } from '@shared/components/MainButton';
-import { ISong } from '@shared/interfaces/song.interface';
 import { SearchInput } from '../components/SearchInput';
 import profileImg from '@assets/images/esteban.jpeg';
 import { MusicItem } from '../components/MusicItem';
