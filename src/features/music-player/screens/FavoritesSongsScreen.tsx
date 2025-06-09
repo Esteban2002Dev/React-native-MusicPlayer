@@ -1,5 +1,5 @@
+import { ISong } from '@shared/interfaces/music-player/song.interface';
 import { globalStyles } from '@config/theme/GlobalStyles.styles';
-import { ISong } from '@shared/interfaces/song.interface';
 import { SearchInput } from '../components/SearchInput';
 import { MusicItem } from '../components/MusicItem';
 import { IonIcon } from '@shared/components/IonIcon';

@@ -9,8 +9,8 @@ import {
     PanResponderGestureState,
     GestureResponderEvent,
 } from 'react-native';
+import { ISong } from '@shared/interfaces/music-player/song.interface';
 import PlaylistIconOutline from '@assets/icons/playlist-outline.svg';
-import { ISong } from '@shared/interfaces/song.interface';
 import { IonIcon } from '@shared/components/IonIcon';
 import { useSong } from '../store/song-store';
 import { COLORS } from '@config/theme/Colors';
