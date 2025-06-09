@@ -13,6 +13,23 @@
             "description": "canciones agregadas."
         }
     },
+    "playlists-screen": {
+        "header" : {
+            "title": "Aquí están tus",
+            "subtitle": "Playlists.",
+            "description": "playlist creadas."
+        },
+        "search-input": {
+            "placeholder": "Buscar tus playlists..."
+        },
+        "playlist-item": {
+            "created-at": "Creada el",
+            "songs-length": {
+                "plural": "canciones agregadas.",
+                "singular": "canción agregada."
+            } 
+        }
+    },
     "button-text": {
         "play": "Reproducir"
     },
