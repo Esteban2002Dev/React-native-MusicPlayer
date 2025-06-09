@@ -13,6 +13,23 @@
             "description": "songs were added."
         }
     },
+    "playlists-screen": {
+        "header" : {
+            "title": "Here're your",
+            "subtitle": "Playlists.",
+            "description": "playlist were created."
+        },
+        "search-input": {
+            "placeholder": "search on your playlists..."
+        },
+        "playlist-item": {
+            "created-at": "Created on",
+            "songs-length": {
+                "plural": "songs were added.",
+                "singular": "song was added."
+            } 
+        }
+    },
     "button-text": {
         "play": "Play"
     },

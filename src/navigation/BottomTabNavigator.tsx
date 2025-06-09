@@ -1,5 +1,6 @@
 import { FavoritesSongsScreen } from '@features/music-player/screens/FavoritesSongsScreen';
 import { MusicListScreen } from '@features/music-player/screens/MusicListScreen';
+import { PlaylistScreen } from '@features/music-player/screens/PlaylistScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PlaylistIconOutline from '@assets/icons/playlist-outline.svg';
 import { CustomTabBar } from './components/AnimatedBottomTabBar';
@@ -30,7 +31,7 @@ export function BottomTabNavigator() {
           <IonIcon name="heart-outline" color={color} size={size} />
         )
       }} />
-      <Tab.Screen name={t('tabs-name.playlists', { ns: 'tabs' })} component={MusicListScreen} 
+      <Tab.Screen name={t('tabs-name.playlists', { ns: 'tabs' })} component={PlaylistScreen} 
       options={{
         tabBarIcon: ({ color, size }) => (
           <PlaylistIconOutline width={size} height={size} color={color} />
