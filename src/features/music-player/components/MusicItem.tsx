@@ -33,12 +33,34 @@ export function MusicItem({
     };
 
     const translateX = useRef(new Animated.Value(0)).current;
-
+    const onPressAnimationValue = useRef(new Animated.Value(0)).current;
     const borderRadius = translateX.interpolate({
         inputRange: [0, 100],
         outputRange: [0, 10],
         extrapolate: 'clamp',
     });
+
+    const handlePressIn = () => {
+        Animated.timing(onPressAnimationValue, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: false,
+        }).start();
+    }
+    const handlePressOut = () => {
+        Animated.timing(onPressAnimationValue, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: false,
+        }).start();
+    }
+
+    const onPressAnimationStyle = {
+        backgroundColor: onPressAnimationValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [COLORS.WHITE[200], COLORS.GREY[200]]
+        }),
+    }
 
     const addToQueue = (side: string) => {
         console.log(side);
@@ -86,11 +108,21 @@ export function MusicItem({
                 },
             ]}
             {...panResponder.panHandlers}>
-                <Pressable style={({pressed}) => ({
+                <Pressable
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={{
                     ... styles.container,
-                    backgroundColor: pressed ? COLORS.GREY.base : COLORS.WHITE[200]
-                })}
+                }}
                 onPress={() => reproduceSong(item)}>
+                    <Animated.View style={{
+                        position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        ... onPressAnimationStyle
+                    }} />
                     <View style={styles.index}>
                         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.indexText}>
                             {formatIndex()}
@@ -113,6 +145,7 @@ export function MusicItem({
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: COLORS.WHITE[200],
         minHeight: 80,
         flexDirection: 'row',
         gap: 5,
