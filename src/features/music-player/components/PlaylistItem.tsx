@@ -23,7 +23,6 @@ interface PlaylistItemProps {
 export function PlaylistItem({ playlist }: PlaylistItemProps) {
     const { t } = useTranslation();
     const animValue = useRef(new Animated.Value(0)).current;
-    let longPressTimeout: any;
 
     const handlePressIn = () => {
         Animated.timing(animValue, {
@@ -31,10 +30,6 @@ export function PlaylistItem({ playlist }: PlaylistItemProps) {
             duration: 200,
             useNativeDriver: false,
         }).start();
-
-        longPressTimeout = setTimeout(() => {
-            showMenu();
-        }, 1000);
     };
 
     const handlePressOut = () => {
@@ -43,10 +38,11 @@ export function PlaylistItem({ playlist }: PlaylistItemProps) {
             duration: 200,
             useNativeDriver: false,
         }).start();
-
-        clearTimeout(longPressTimeout);
     };
 
+    const handleLongPress = () => {
+        showMenu();
+    }
     const showMenu = () => {
         console.log('Abrir menú...');
     }
@@ -93,7 +89,9 @@ export function PlaylistItem({ playlist }: PlaylistItemProps) {
     };
 
     return (
-        <Pressable onPressIn={handlePressIn} onPressOut={handlePressOut}>
+        <Pressable
+        onPressIn={handlePressIn} onPressOut={handlePressOut}
+        onLongPress={handleLongPress} delayLongPress={500}>
             <Animated.View style={animatedStyle}>
                 <View style={[styles.container, globalStyles.background]}>
                     <View style={styles.imageContainer}>
